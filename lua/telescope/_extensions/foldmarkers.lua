@@ -53,9 +53,18 @@ local folding_marker_finder = function()
 end
 
 local folding_marker_picker = function(opts)
+    -- {{{ works with hard coded values
+    opts = vim.tbl_deep_extend("force", opts or {}, {
+        layout_strategy = "vertical",
+        layout_config = {
+            height = 0.75,
+            width = 0.35,
+        },
+    })
+
     pickers
         .new(opts, {
-            prompt_title = 'Folding Markers',
+            prompt_title = 'Markers',
             finder = folding_marker_finder(),
             sorter = conf.generic_sorter(opts),
             -- TODO: add previewer for the current buffer to show context
